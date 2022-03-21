@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label>Caracteres restantes: <span></span></label>
+        <input type="text" maxlength="150" />
+        <label> Caracteres restantes: <span></span></label>
+        <textarea maxlength="150"></textarea>
+      </form>   
+
+      <script>
+          var inputs = "input[maxlength], textarea[maxlength]";
+          $(document).on('keyup', "[maxlength]", function (e) {
+          var este = $(this),
+          maxlength = este.attr('maxlength'),
+          maxlengthint = parseInt(maxlength),
+          textoActual = este.val(),
+          currentCharacters = este.val().length;
+          remainingCharacters = maxlengthint - currentCharacters,
+          espan = este.prev('label').find('span');      
+            if (document.addEventListener && !window.requestAnimationFrame) {
+            if (remainingCharacters <= -1) {
+                remainingCharacters = 0;            
+            }
+            } 
+            espan.html(remainingCharacters);
+            if (!!maxlength) {
+            var texto = este.val(); 
+                if (texto.length >= maxlength) {
+                este.removeClass().addClass("borderojo");
+                este.val(text.substring(0, maxlength));
+                e.preventDefault();
+            }
+            else if (texto.length < maxlength) {
+            este.removeClass().addClass("bordegris");
+            } 
+            } 
+            });
+        </script>
+
+      <style>
+          body { font: 12px arial; }
+            label { display: block; }
+          input {
+             box-sizing: border-box;
+             margin: 5px 0 15px 0;
+             padding: 5px;
+             width: 100%;
+            }
+            textarea {
+                box-sizing: border-box;
+                font: 12px arial;
+                height: 200px;
+                margin: 5px 0 15px 0;
+                padding: 5px 2px;
+                width: 100%;  
+            }
+            .borderojo {
+            outline: none;
+            border: 1px solid #f00;
+            }
+
+        </style>
+
+    </body>
+</html>
